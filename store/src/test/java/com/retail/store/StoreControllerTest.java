@@ -24,7 +24,7 @@ import com.retail.store.model.Item;
 import com.retail.store.service.StoreService;
 
 @SpringBootTest(classes = StoreApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
-public class StoreControllerTest {
+class StoreControllerTest {
 	
 	@MockBean
 	private StoreService storeService;
@@ -36,7 +36,7 @@ public class StoreControllerTest {
 	HttpHeaders headers = new HttpHeaders();
 	
 	@Test
-	public void testBillController() throws Exception {
+	void testBillController() throws Exception {
 		HttpEntity<Customer> request = new HttpEntity<>(getCustomer(), headers);
 		final String baseURL = "http://localhost:"+port+"/store/bill";
 		URI uri = new URI(baseURL);

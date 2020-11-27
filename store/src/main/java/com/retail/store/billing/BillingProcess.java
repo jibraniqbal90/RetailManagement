@@ -23,6 +23,19 @@ public class BillingProcess {
 	@Value("${discountedAmount}")
 	private float discountedAmount;
 	
+	/**
+	 * 
+	 * @param discountPercent
+	 * @param itemList
+	 * @return
+	 * 
+	 * This method will calculate the final bill.
+	 * First it will calculate the Groceries and non Groceries bill
+	 * After that it will apply respective discount to non groceries amount
+	 * Final bill is calculated after applying amount based discount.
+	 * 
+	 */
+	
 	public Bill generateBill(float discountPercent, List<Item> itemList) {
 		bill = new Bill();
 		float nonGroceriesAmountAfterDiscount;
@@ -37,16 +50,38 @@ public class BillingProcess {
 		return bill;
 	}
 	
+	/**
+	 * 
+	 * @param discountPercent
+	 * @return
+	 * 
+	 * This method will calculate the percentage based discount on Non groceries amount
+	 */
 	
 	private float getNonGroceriesAmtAfterDiscount(float discountPercent) {
 		DiscountProcess discountProcess  = DiscountFactory.getPercentageBasedInstance();
 		return discountProcess.getAmount(bill.getNonGroceriesAmount(), discountPercent);
 	}
 	
+	/**
+	 * 
+	 * @param totalAmount
+	 * @return
+	 * 
+	 * This method will calculate the final bill after applying Amount based discount
+	 */
+	
+	
 	private float getNetPayableAmount(float totalAmount) {
 		DiscountProcess discountProcess  = DiscountFactory.getAmountBasedInstance(amountCutOff);
 		return discountProcess.getAmount(totalAmount, discountedAmount);
 	}
+	
+	/**
+	 * 
+	 * @param itemList
+	 * This method will calculate the total amount for Groceries and non Groceries items.
+	 */
 	
 	private void calcualteBillAmount(List<Item> itemList) {
 		float nonGroceriesTotalAmount = 0.0f;

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -16,19 +16,19 @@ import com.retail.store.billing.BillingProcess;
 import com.retail.store.model.Item;
 
 @SpringBootTest
-public class StoreBillingProcessTest {
+class StoreBillingProcessTest {
 	
 	@Autowired
 	private BillingProcess billingProcess;
 	
-	@Before
+	@BeforeEach
 	public void initializeValues() {
 		ReflectionTestUtils.setField(billingProcess, "amountCutOff", 100f);
 		ReflectionTestUtils.setField(billingProcess, "discountedAmount", 5f);
 	}
 	
 	@Test
-	public void generateBill_test() {
+	void generateBill_test() {
 		assertEquals(268.05f, billingProcess.generateBill(30.0f, getItemList()).getPayableAmount());
 	}
 	

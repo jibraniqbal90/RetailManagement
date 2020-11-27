@@ -15,7 +15,7 @@ import com.retail.store.model.Customer;
 import com.retail.store.service.StoreService;
 
 @SpringBootTest
-public class StoreServiceTest {
+class StoreServiceTest {
 	
 	@Autowired
 	private StoreService storeService;
@@ -24,28 +24,28 @@ public class StoreServiceTest {
 	private BillingProcess billingProcess;
 	
 	@Test
-	public void generateBillEmployee_test() {
+	void generateBillEmployee_test() {
 		Mockito.when(billingProcess.generateBill(Mockito.anyFloat(), Mockito.any())).thenReturn(getBill(362.59f));
 		Bill bill =  storeService.generateBill(getEmployeeCustomer());
 		assertEquals(362.59f, bill.getPayableAmount());
 	}
 	
 	@Test
-	public void generateBillAffliated_test() {
+	void generateBillAffliated_test() {
 		Mockito.when(billingProcess.generateBill(Mockito.anyFloat(), Mockito.any())).thenReturn(getBill(367.98f));
 		Bill bill =  storeService.generateBill(getAffiliatedCustomer());
 		assertEquals(367.98f, bill.getPayableAmount());
 	}
 	
 	@Test
-	public void generateBillValuedCustomer_test() {
+	void generateBillValuedCustomer_test() {
 		Mockito.when(billingProcess.generateBill(Mockito.anyFloat(), Mockito.any())).thenReturn(getBill(369.32f));
 		Bill bill =  storeService.generateBill(getValuedCustomer());
 		assertEquals(369.32f, bill.getPayableAmount());
 	}
 	
 	@Test
-	public void generateBillNormal_test() {
+	void generateBillNormal_test() {
 		Mockito.when(billingProcess.generateBill(Mockito.anyFloat(), Mockito.any())).thenReturn(getBill(370.67f));
 		Bill bill =  storeService.generateBill(getNormalCustomer());
 		assertEquals(370.67f, bill.getPayableAmount());
